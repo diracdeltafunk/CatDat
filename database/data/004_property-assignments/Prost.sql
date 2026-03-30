@@ -49,6 +49,12 @@ VALUES
 ),
 (
 	'Prost',
+	'regular subobject classifier',
+	TRUE,
+	'The set $\{0,1\}$ with the chaotic preorder $(0 \leq 1$, $1 \leq 0)$ is a regular subobject classifier since order-preserving maps $P \to \{0,1\}$ correspond to subsets of $P$.'	
+),
+(
+	'Prost',
 	'strict terminal object',
 	FALSE,
 	'This is trivial.'

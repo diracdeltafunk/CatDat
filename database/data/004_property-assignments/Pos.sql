@@ -82,4 +82,10 @@ VALUES
 	'co-Malcev',
 	FALSE,
 	'See <a href="https://mathoverflow.net/questions/509552">MO/509552</a>: Consider the forgetful functor $U : \mathbf{Pos} \to \mathbf{Set}$ and the relation $R \subseteq U^2$ defined by $R(A) := \{(a,b) \in U(A)^2 : a \leq b\}$. Both are representable: $U$ by the singleton poset and $R$ by $\{0 \leq 1 \}$. It is clear that $R$ is reflexive, but not symmetric.'
+),
+(
+	'Pos',
+	'regular subobject classifier',
+	FALSE,
+	'Assume that there is a regular subobject classifier $\Omega$, so that (by the classification of regular monomorphisms) $\mathrm{Hom}(P,\Omega)$ is isomorphic to the set of subsets of $P$. By taking $P = \{0\}$ we see that $\Omega$ has $2$ elements, so that either $\Omega \cong \{0,1\}$ (discrete) or $\Omega \cong \{0 < 1\}$. By taking $P = \{0 < 1\}$ we see that $\Omega$ has four pairs $(x,y)$ with $x \leq y$. But $\{0,1\}$ has only two and $\{0 < 1\}$ has only three such pairs.'	
 );

@@ -56,6 +56,34 @@ VALUES
 	FALSE
 ),
 (
+	'regular_subobjects_trivial',
+	'["right cancellative", "finitely complete"]',
+	'["regular subobject classifier"]',
+	'In a right cancellative category, every regular monomorphism is an isomorphism, so that a terminal object is a regular subobject classifier.',
+	FALSE
+),
+(
+	'regular_subobject_weaker',
+	'["subobject classifier"]',
+	'["regular subobject classifier"]',
+	'This is obvious.',
+	FALSE
+),
+(
+	'regular_subobject_assumption',
+	'["regular subobject classifier"]',
+	'["finitely complete"]',
+	'This holds by definition.',
+	FALSE
+),
+(
+	'regular_subobjects_suffice',
+	'["regular subobject classifier", "mono-regular"]',
+	'["subobject classifier"]',
+	'This is obvious.',
+	FALSE
+),
+(
 	'pullbacks_are_local_products',
 	'["locally cartesian closed"]',
 	'["pullbacks"]',

@@ -5,6 +5,8 @@ on:
 jobs:
     call-deploy:
         uses: ./.github/workflows/_deploy-reusable.yaml
+        permissions:
+            contents: write
         with:
             is_prod: true
             skip_db: true

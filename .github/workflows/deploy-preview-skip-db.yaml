@@ -1,4 +1,4 @@
-name: preview deployment
+name: preview deployment (without db update)
 on:
     workflow_dispatch:
 
@@ -7,7 +7,7 @@ jobs:
         uses: ./.github/workflows/_deploy-reusable.yaml
         with:
             is_prod: false
-            skip_db: false
+            skip_db: true
         secrets:
             DB_URL: ${{ secrets.DB_PREVIEW_URL }}
             DB_AUTH_TOKEN: ${{ secrets.DB_PREVIEW_AUTH_TOKEN }}

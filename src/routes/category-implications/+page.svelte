@@ -3,6 +3,7 @@
 	import ImplicationList from '$components/ImplicationList.svelte'
 	import MetaData from '$components/MetaData.svelte'
 	import SearchFilter from '$components/SearchFilter.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { pluralize } from '$lib/client/utils'
 
 	let { data } = $props()
@@ -77,3 +78,5 @@
 		Show deduced implications
 	{/if}
 </button>
+
+<SuggestionForm />

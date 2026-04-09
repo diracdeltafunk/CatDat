@@ -2,6 +2,7 @@
 	import MetaData from '$components/MetaData.svelte'
 	import PropertyList from '$components/PropertyList.svelte'
 	import SearchFilter from '$components/SearchFilter.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { pluralize } from '$lib/client/utils'
 
 	let { data } = $props()
@@ -34,3 +35,5 @@
 </p>
 
 <PropertyList properties={searched_properties} />
+
+<SuggestionForm />

@@ -2,6 +2,7 @@
 	import FunctorImplicationList from '$components/FunctorImplicationList.svelte'
 	import FunctorList from '$components/FunctorList.svelte'
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { pluralize } from '$lib/client/utils'
 	import { get_property_url } from '$lib/commons/property.url'
 
@@ -87,3 +88,5 @@
 </p>
 
 <FunctorList functors={data.unknown_functors} />
+
+<SuggestionForm />

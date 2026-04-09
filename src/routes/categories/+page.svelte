@@ -4,6 +4,7 @@
 	import ChipGroup from '$components/ChipGroup.svelte'
 	import MetaData from '$components/MetaData.svelte'
 	import SearchFilter from '$components/SearchFilter.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { filter_by_tag, pluralize } from '$lib/client/utils'
 
 	let { data } = $props()
@@ -45,6 +46,8 @@
 		{/each}
 	</ChipGroup>
 </section>
+
+<SuggestionForm />
 
 <style>
 	section + section {

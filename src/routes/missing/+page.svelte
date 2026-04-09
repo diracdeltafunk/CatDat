@@ -2,6 +2,7 @@
 	import CategoryList from '$components/CategoryList.svelte'
 	import FunctorList from '$components/FunctorList.svelte'
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { get_property_url } from '$lib/commons/property.url'
 
 	const { data } = $props()
@@ -108,6 +109,8 @@
 
 	<FunctorList functors={data.functors_with_unknown_properties} />
 </section>
+
+<SuggestionForm />
 
 <style>
 	.combinations {

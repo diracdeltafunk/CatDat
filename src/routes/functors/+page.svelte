@@ -1,6 +1,7 @@
 <script lang="ts">
 	import FunctorList from '$components/FunctorList.svelte'
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { pluralize } from '$lib/client/utils'
 	import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
@@ -28,3 +29,5 @@
 </p>
 
 <FunctorList functors={data.functors} />
+
+<SuggestionForm />

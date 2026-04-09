@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 </script>
 
 <MetaData title="How to contribute" description="Options to contribute to CatDat" />
@@ -56,3 +57,5 @@
 		target="_blank">contribution guidelines</a
 	>.
 </p>
+
+<SuggestionForm />

@@ -2,6 +2,7 @@
 	import CategoryList from '$components/CategoryList.svelte'
 	import ImplicationList from '$components/ImplicationList.svelte'
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { pluralize } from '$lib/client/utils'
 	import { get_property_url } from '$lib/commons/property.url'
 
@@ -98,3 +99,5 @@
 </p>
 
 <CategoryList categories={data.unknown_categories} />
+
+<SuggestionForm />

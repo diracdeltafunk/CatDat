@@ -9,6 +9,7 @@
 	import CategoryList from '$components/CategoryList.svelte'
 	import { faQuestion, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 
 	let { data } = $props()
 
@@ -208,6 +209,8 @@
 		</ul>
 	</section>
 {/if}
+
+<SuggestionForm />
 
 <style>
 	.main {

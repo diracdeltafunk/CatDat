@@ -1,6 +1,7 @@
 <script lang="ts">
 	import MetaData from '$components/MetaData.svelte'
 	import PropertyList from '$components/PropertyList.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { category_detail_level } from '$lib/states/detail_level.svelte'
 	let { data } = $props()
 
@@ -109,6 +110,8 @@
 		<PropertyList properties={data.unknown_properties} type="functor" />
 	</section>
 {/key}
+
+<SuggestionForm />
 
 <style>
 	.main {

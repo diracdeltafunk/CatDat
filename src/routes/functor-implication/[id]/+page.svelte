@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MetaData from '$components/MetaData.svelte'
+	import SuggestionForm from '$components/SuggestionForm.svelte'
 	import { get_property_url } from '$lib/commons/property.url'
 	import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
@@ -81,3 +82,5 @@
 {/if}
 
 <button class="button" onclick={() => window.history.back()}>Go back</button>
+
+<SuggestionForm />

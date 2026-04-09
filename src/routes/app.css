@@ -124,15 +124,21 @@ ul li::marker {
 
 button,
 input,
-select {
+select,
+textarea {
 	font: inherit;
 	background: none;
 	border: none;
 	color: inherit;
 }
 
+textarea {
+	resize: vertical;
+}
+
 input[type='text'],
 input[type='search'],
+textarea,
 select {
 	padding: 0.25rem 0.75rem;
 	border-radius: 0.4rem;
@@ -156,6 +162,12 @@ input[type='search']::-webkit-search-cancel-button {
 
 input[type='search']::-ms-clear {
 	display: none;
+}
+
+label {
+	display: block;
+	margin-bottom: 0.1rem;
+	font-size: 1rem;
 }
 
 button:not(:disabled) {

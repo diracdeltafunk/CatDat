@@ -2,17 +2,15 @@
 
 There are three ways to contribute:
 
-- [Submit Our Google Form](#option-1-submit-our-google-form)
+- [Use the Suggestion Form](#option-1-use-the-suggestion-form)
 - [Create a Pull Request](#option-2-create-a-pull-request)
 - [Create an Issue](#option-3-create-an-issue)
 
-## Option 1: Submit our Google Form
+## Option 1: Use the Suggestion Form
 
-The Google Form is the least technical way to submit new categories, properties, and implications. Issues and feature requests can also be submitted. This option does not require any knowledge of GitHub or coding, making it accessible to everyone.
+On most pages of CatDat, you will find a suggestion form at the bottom. Use it to contribute new data, report an issue, or make a suggestion. After submission, the form automatically creates a GitHub issue, which we then review and try to resolve and implement.
 
-[**Link to the Google Form**](https://forms.gle/8LBmro5FfSa43pD2A)
-
-We will then review your submission and try to implement it.
+This option does not require any knowledge of GitHub or coding, making it accessible to everyone. It also does not require following any guidelines for adding new data (see below).
 
 ## Option 2: Create a Pull Request
 
@@ -110,3 +108,7 @@ When contributing new data (categories, functors, properties, implications), ple
 ## Option 3: Create an Issue
 
 If you want to report a bug or submit a feature request, you can [**create an issue**](https://github.com/ScriptRaccoon/CatDat/issues/new). You will need a GitHub account for this.
+
+## Deprecated Options
+
+Before the Suggestion Form (Option 1) was introduced, you could use a [Google Form](https://forms.gle/8LBmro5FfSa43pD2A). It is deprecated and will be removed soon.

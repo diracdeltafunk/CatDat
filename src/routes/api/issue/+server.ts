@@ -36,12 +36,17 @@ export const POST = async (event) => {
 
 	if ('error' in data) return json({ error: data.error }, { status: 400 })
 
-	const { title, body } = data
+	const { title, body, url } = data
 
 	if (has_profanity(title, body)) {
 		await flag_violation(ip, 'profanity')
 		return json({ error: 'Profanity detected' }, { status: 400 })
 	}
+
+	const full_body =
+		body +
+		'\n\n---\n' +
+		`This issue has been created via the submission form on ${url}`
 
 	try {
 		const octokit = await app.getInstallationOctokit(Number(GITHUB_INSTALLATION_ID))
@@ -50,7 +55,7 @@ export const POST = async (event) => {
 			owner: GITHUB_OWNER,
 			repo: GITHUB_REPO,
 			title,
-			body,
+			body: full_body,
 		})
 
 		return json({ url: issue.data.html_url })
@@ -62,7 +67,7 @@ export const POST = async (event) => {
 
 async function parse_data(
 	request: Request,
-): Promise<{ error: string } | { title: string; body: string }> {
+): Promise<{ error: string } | { title: string; body: string; url: string }> {
 	let data
 	try {
 		data = await request.json()
@@ -70,13 +75,15 @@ async function parse_data(
 		return { error: 'Invalid request body' }
 	}
 
-	const { title, body } = data
+	const { title, body, url } = data
 
 	if (!title) return { error: 'Title required' }
 	if (!body) return { error: 'Body required' }
+	if (!url) return { error: 'URL required' }
 
 	if (typeof title !== 'string') return { error: 'Title must be a string' }
 	if (typeof body !== 'string') return { error: 'Body must be a string' }
+	if (typeof url !== 'string') return { error: 'URL must be a string' }
 
 	if (title.length > TITLE_MAX_LENGTH) {
 		return { error: `Title must have at most ${TITLE_MAX_LENGTH} characters` }
@@ -85,5 +92,9 @@ async function parse_data(
 		return { error: `Body must have at most ${BODY_MAX_LENGTH} characters` }
 	}
 
-	return { title, body }
+	if (!url.startsWith('https://') && !url.startsWith('http://')) {
+		return { error: 'URL must be a valid URL' }
+	}
+
+	return { title, body, url }
 }

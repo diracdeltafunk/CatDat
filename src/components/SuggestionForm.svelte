@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state'
 	import { resize_textarea } from '$lib/client/utils'
 	import { faCheckCircle, faWarning } from '@fortawesome/free-solid-svg-icons'
 	import { tick } from 'svelte'
@@ -20,7 +21,7 @@
 		try {
 			const res = await fetch('/api/issue', {
 				method: 'POST',
-				body: JSON.stringify({ title, body }),
+				body: JSON.stringify({ title, body, url: page.url.href }),
 			})
 
 			const res_json = await res.json()

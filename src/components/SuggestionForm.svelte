@@ -33,6 +33,7 @@
 			const res = await fetch('/api/issue', {
 				method: 'POST',
 				body: JSON.stringify({ title, body, url: page.url.href, name }),
+				headers: { 'Content-Type': 'application/json' },
 			})
 
 			const res_json = await res.json()

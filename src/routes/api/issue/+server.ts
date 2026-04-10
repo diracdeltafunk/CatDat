@@ -10,6 +10,7 @@ import {
 	GITHUB_REPO,
 	TITLE_MAX_LENGTH,
 	NAME_MAX_LENGTH,
+	ORIGIN,
 } from './config'
 import { flag_violation, is_blocked, has_profanity, rate_limit } from '$lib/server/redis'
 
@@ -72,6 +73,16 @@ async function parse_data(
 ): Promise<
 	{ error: string } | { title: string; body: string; url: string; name: string }
 > {
+	const content_type = request.headers.get('Content-Type')
+	if (content_type !== 'application/json') {
+		return { error: 'Forbidden' }
+	}
+
+	const origin = request.headers.get('origin') ?? ''
+	if (!request.url.startsWith(origin)) {
+		return { error: 'Forbidden' }
+	}
+
 	let data
 	try {
 		data = await request.json()

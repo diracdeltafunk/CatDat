@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { scroll_into_view } from '$lib/client/utils'
 	import { faCheckCircle, faWarning } from '@fortawesome/free-solid-svg-icons'
+	import { tick } from 'svelte'
 	import Fa from 'svelte-fa'
 
 	let title = $state('')
@@ -34,11 +34,18 @@
 			error = 'Failed to fetch API'
 		} finally {
 			sending = false
+			await tick()
+			section?.scrollIntoView({
+				block: 'end',
+				behavior: 'smooth',
+			})
 		}
 	}
+
+	let section = $state<HTMLElement | null>(null)
 </script>
 
-<section>
+<section bind:this={section}>
 	<h2>Suggestion Form</h2>
 
 	<p class="hint">
@@ -67,14 +74,14 @@
 	</form>
 
 	{#if error}
-		<p class="error" {@attach scroll_into_view}>
+		<p class="error">
 			<Fa icon={faWarning} />
 			Error: {error}
 		</p>
 	{/if}
 
 	{#if url}
-		<p {@attach scroll_into_view}>
+		<p>
 			<Fa icon={faCheckCircle} />
 			Your suggestion has been created as a
 			<a href={url} target="_blank">GitHub issue</a>. We will have a look at it!
@@ -85,6 +92,8 @@
 <style>
 	section {
 		margin-top: 4rem;
+		padding-bottom: 1rem;
+		margin-bottom: -1rem;
 	}
 
 	.error {

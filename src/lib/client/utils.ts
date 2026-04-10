@@ -26,7 +26,3 @@ export function string_to_color(str: string): string {
 	const h = hash % 360
 	return `hsl(${h}, 80%, 50%)`
 }
-
-export const scroll_into_view: Attachment = (element) => {
-	element.scrollIntoView({ block: 'end', behavior: 'smooth' })
-}

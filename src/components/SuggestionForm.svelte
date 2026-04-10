@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resize_textarea } from '$lib/client/utils'
 	import { faCheckCircle, faWarning } from '@fortawesome/free-solid-svg-icons'
 	import { tick } from 'svelte'
 	import Fa from 'svelte-fa'
@@ -60,7 +61,8 @@
 
 		<div class="form-group">
 			<label for="body">Details</label>
-			<textarea id="body" bind:value={body} required></textarea>
+			<textarea id="body" {@attach resize_textarea} bind:value={body} required
+			></textarea>
 		</div>
 
 		<button class="button" disabled={sending}>

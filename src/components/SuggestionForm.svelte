@@ -7,10 +7,12 @@
 	let body = $state('')
 	let error = $state('')
 	let url = $state('')
+	let sending = $state(false)
 
 	async function create_issue(e: SubmitEvent) {
 		e.preventDefault()
 
+		sending = true
 		error = ''
 		url = ''
 
@@ -30,6 +32,8 @@
 		} catch (err) {
 			console.error(err)
 			error = 'Failed to fetch API'
+		} finally {
+			sending = false
 		}
 	}
 </script>
@@ -53,7 +57,13 @@
 			<textarea id="body" bind:value={body} required></textarea>
 		</div>
 
-		<button class="button">Submit</button>
+		<button class="button" disabled={sending}>
+			{#if sending}
+				Submitting...
+			{:else}
+				Submit
+			{/if}
+		</button>
 	</form>
 
 	{#if error}

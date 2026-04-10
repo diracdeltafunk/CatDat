@@ -50,6 +50,7 @@
 		"@octokit/app": "^16.1.2",
 		"chart.js": "^4.5.1",
 		"es6-crawler-detect": "^4.0.2",
+		"ioredis": "^5.10.1",
 		"katex": "^0.16.44",
 		"sql-template-tag": "^5.2.1",
 		"svelte-chartjs": "^4.0.1",

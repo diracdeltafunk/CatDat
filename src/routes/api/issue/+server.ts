@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit'
 import { App } from '@octokit/app'
 import { GITHUB_PRIVATE_KEY } from '$env/static/private'
-import { rate_limit } from '$lib/server/ratelimit'
+
 import {
 	BODY_MAX_LENGTH,
 	GITHUB_APP_ID,
@@ -10,6 +10,7 @@ import {
 	GITHUB_REPO,
 	TITLE_MAX_LENGTH,
 } from './config'
+import { flag_rate_limit_violation, is_blocked, rate_limit } from '$lib/server/redis'
 
 const app = new App({
 	appId: GITHUB_APP_ID,
@@ -19,7 +20,12 @@ const app = new App({
 export const POST = async (event) => {
 	const ip = event.getClientAddress()
 
-	if (!rate_limit(ip)) {
+	if (await is_blocked(ip)) {
+		return json({ error: 'Forbidden' }, { status: 403 })
+	}
+
+	if (!(await rate_limit(ip))) {
+		await flag_rate_limit_violation(ip)
 		return json(
 			{ error: 'Too many requests. Please try again later.' },
 			{ status: 429 },

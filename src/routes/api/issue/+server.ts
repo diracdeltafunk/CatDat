@@ -10,7 +10,7 @@ import {
 	GITHUB_REPO,
 	TITLE_MAX_LENGTH,
 } from './config'
-import { flag_rate_limit_violation, is_blocked, rate_limit } from '$lib/server/redis'
+import { flag_violation, is_blocked, has_profanity, rate_limit } from '$lib/server/redis'
 
 const app = new App({
 	appId: GITHUB_APP_ID,
@@ -25,7 +25,7 @@ export const POST = async (event) => {
 	}
 
 	if (!(await rate_limit(ip))) {
-		await flag_rate_limit_violation(ip)
+		await flag_violation(ip, 'rate_limit')
 		return json(
 			{ error: 'Too many requests. Please try again later.' },
 			{ status: 429 },
@@ -37,6 +37,11 @@ export const POST = async (event) => {
 	if ('error' in data) return json({ error: data.error }, { status: 400 })
 
 	const { title, body } = data
+
+	if (has_profanity(title, body)) {
+		await flag_violation(ip, 'profanity')
+		return json({ error: 'Profanity detected' }, { status: 400 })
+	}
 
 	try {
 		const octokit = await app.getInstallationOctokit(Number(GITHUB_INSTALLATION_ID))

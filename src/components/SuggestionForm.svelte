@@ -49,18 +49,17 @@
 	<h2>Suggestion Form</h2>
 
 	<p class="hint">
-		Use the form below to contribute missing data, report an issue, or make a
-		suggestion.
+		Use the form below to report missing data, submit an issue, or make a suggestion.
 	</p>
 
 	<form onsubmit={create_issue}>
 		<div class="form-group">
-			<label for="title">Title</label>
+			<label for="title">Short summary</label>
 			<input type="text" id="title" bind:value={title} required />
 		</div>
 
 		<div class="form-group">
-			<label for="body">Body</label>
+			<label for="body">Details</label>
 			<textarea id="body" bind:value={body} required></textarea>
 		</div>
 
@@ -84,7 +83,7 @@
 		<p>
 			<Fa icon={faCheckCircle} />
 			Your suggestion has been created as a
-			<a href={url} target="_blank">GitHub issue</a>. We will have a look at it!
+			<a href={url} target="_blank">GitHub issue</a>. We will review it shortly.
 		</p>
 	{/if}
 </section>

@@ -1,12 +1,17 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import { page } from '$app/state'
 	import { resize_textarea } from '$lib/client/utils'
 	import { faCheckCircle, faWarning } from '@fortawesome/free-solid-svg-icons'
 	import { tick } from 'svelte'
 	import Fa from 'svelte-fa'
 
+	const saved_name = browser ? (window.localStorage.getItem('name') ?? '') : ''
+
 	let title = $state('')
 	let body = $state('')
+	let name = $state(saved_name)
+
 	let error = $state('')
 	let url = $state('')
 	let sending = $state(false)
@@ -18,10 +23,16 @@
 		error = ''
 		url = ''
 
+		if (name) {
+			window.localStorage.setItem('name', name)
+		} else {
+			window.localStorage.removeItem('name')
+		}
+
 		try {
 			const res = await fetch('/api/issue', {
 				method: 'POST',
-				body: JSON.stringify({ title, body, url: page.url.href }),
+				body: JSON.stringify({ title, body, url: page.url.href, name }),
 			})
 
 			const res_json = await res.json()
@@ -57,13 +68,29 @@
 	<form onsubmit={create_issue}>
 		<div class="form-group">
 			<label for="title">Short summary</label>
-			<input type="text" id="title" bind:value={title} required />
+			<input
+				type="text"
+				id="title"
+				class="full-width"
+				bind:value={title}
+				required
+			/>
 		</div>
 
 		<div class="form-group">
 			<label for="body">Details</label>
-			<textarea id="body" {@attach resize_textarea} bind:value={body} required
+			<textarea
+				id="body"
+				{@attach resize_textarea}
+				bind:value={body}
+				required
+				class="full-width"
 			></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="name">Your name (optional)</label>
+			<input type="text" id="name" bind:value={name} />
 		</div>
 
 		<button class="button" disabled={sending}>
@@ -100,11 +127,6 @@
 
 	.error {
 		color: var(--error-color);
-	}
-
-	input,
-	textarea {
-		width: 100%;
 	}
 
 	.form-group {

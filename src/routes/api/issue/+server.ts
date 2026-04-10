@@ -9,6 +9,7 @@ import {
 	GITHUB_OWNER,
 	GITHUB_REPO,
 	TITLE_MAX_LENGTH,
+	NAME_MAX_LENGTH,
 } from './config'
 import { flag_violation, is_blocked, has_profanity, rate_limit } from '$lib/server/redis'
 
@@ -36,17 +37,18 @@ export const POST = async (event) => {
 
 	if ('error' in data) return json({ error: data.error }, { status: 400 })
 
-	const { title, body, url } = data
+	const { title, body, url, name } = data
 
 	if (has_profanity(title, body)) {
 		await flag_violation(ip, 'profanity')
 		return json({ error: 'Profanity detected' }, { status: 400 })
 	}
 
-	const full_body =
-		body +
-		'\n\n---\n' +
-		`This issue has been created via the submission form on ${url}`
+	const footer = name
+		? `This issue has been created by **${name}** via the submission form on ${url}`
+		: `This issue has been created via the submission form on ${url}`
+
+	const full_body = `${body}\n\n---\n${footer}`
 
 	try {
 		const octokit = await app.getInstallationOctokit(Number(GITHUB_INSTALLATION_ID))
@@ -67,7 +69,9 @@ export const POST = async (event) => {
 
 async function parse_data(
 	request: Request,
-): Promise<{ error: string } | { title: string; body: string; url: string }> {
+): Promise<
+	{ error: string } | { title: string; body: string; url: string; name: string }
+> {
 	let data
 	try {
 		data = await request.json()
@@ -75,7 +79,7 @@ async function parse_data(
 		return { error: 'Invalid request body' }
 	}
 
-	const { title, body, url } = data
+	const { title, body, url, name = '' } = data
 
 	if (!title) return { error: 'Title required' }
 	if (!body) return { error: 'Body required' }
@@ -84,6 +88,7 @@ async function parse_data(
 	if (typeof title !== 'string') return { error: 'Title must be a string' }
 	if (typeof body !== 'string') return { error: 'Body must be a string' }
 	if (typeof url !== 'string') return { error: 'URL must be a string' }
+	if (typeof name !== 'string') return { error: 'Name must be a string' }
 
 	if (title.length > TITLE_MAX_LENGTH) {
 		return { error: `Title must have at most ${TITLE_MAX_LENGTH} characters` }
@@ -96,5 +101,9 @@ async function parse_data(
 		return { error: 'URL must be a valid URL' }
 	}
 
-	return { title, body, url }
+	if (name.length > NAME_MAX_LENGTH) {
+		return { error: `Name must have at most ${NAME_MAX_LENGTH} characters` }
+	}
+
+	return { title, body, url, name }
 }

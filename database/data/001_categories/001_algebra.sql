@@ -199,4 +199,14 @@ VALUES
 	'This is the category of small categories and functors between them. It is the prototype of a 2-category, but here we only treat it as a 1-category.',
 	'https://ncatlab.org/nlab/show/Cat',
 	NULL
+),
+(
+	'Span(FinSet)',
+	'category of spans of finite sets',
+	'$\mathbf{Span}(\mathbf{FinSet})$',
+	'finite sets',
+	'isomorphism classes of spans in $\mathbf{FinSet}$',
+	'This is the 1-category of spans of finite sets -- its objects are finite sets, and the morphisms in $\mathbf{Span}(\mathbf{FinSet})$ from a finite set $X$ to a finite set $Y$ are isomorphism classes of diagrams $X \leftarrow W \rightarrow Y$ in $\mathbf{FinSet}$ (such diagrams are called spans). Here two spans $X \xleftarrow{f} W \xrightarrow{g} Y$ and $X \xleftarrow{f''} W'' \xrightarrow{g''} Y$ are said to be isomorphic if there exists an isomorphism $h : W \to W''$ in $\mathbf{FinSet}$ such that $h f'' = f$ and $h g'' = g$. Composition is given by pullback, i.e. the composite of two spans $X \leftarrow W_1 \rightarrow Y$ and $Y \leftarrow W_2 \rightarrow Z$ is $X \leftarrow W_1 \times_Y W_2 \rightarrow Z$.',
+	'https://ncatlab.org/nlab/show/span#the_1category_of_spans',
+	NULL
 );
